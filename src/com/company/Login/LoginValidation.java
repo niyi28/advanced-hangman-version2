@@ -1,12 +1,13 @@
 package com.company.Login;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class LoginValidation {
 
-    private final Map<String, String> usernamesData = new HashMap<>();
+    private Map<String, String> usernamesData = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
     private String username;
 /*
@@ -16,10 +17,11 @@ shiva
 */
 
     public LoginValidation() {
-        usernamesData.put("niyi", "cool12NapTime");
-        usernamesData.put("school", "co1d2NapTime");
-        usernamesData.put("pankow.school", "co1d2NapTime");
-
+        try{
+           usernamesData =  ManagingDataBase.readIntoDataBase();
+        }catch (IOException e){
+            System.out.println("Oops! Could not read file!");
+        }
     }
 
     public String getUsername() {
