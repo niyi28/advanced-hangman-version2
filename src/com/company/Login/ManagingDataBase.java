@@ -7,29 +7,13 @@ import java.util.*;
 
 public class ManagingDataBase {
 
-    public ManagingDataBase(Map<String, String> username) {
-
-    }
-
-    public ManagingDataBase() {
-
-
-    }
-
-
-
-    public static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
-
-        List<String> usernames = new ArrayList<>(usernameDataBase.keySet());
-        //List<String> passwords = new ArrayList<>(usernameDataBase.);
+    private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
 
         List<List<String>> rows = new ArrayList<>();
-        for(Map.Entry entry: usernameDataBase.entrySet()){
-            String.join(entry.getKey(), ",", entry.getValue());
-
-            Arrays.asList(entry.getKey(), entry.getValue());
-
+        for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
+            rows.add(Arrays.asList(entry.getKey(), entry.getValue()));
         }
+
 
         try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter("src/com/company/Login/DataBase/database.csv"))) {
             csvWriter.append("Username");
@@ -41,11 +25,9 @@ public class ManagingDataBase {
                 csvWriter.append(String.join(",", rowData));
                 csvWriter.append("\n");
             }
-
-            csvWriter.flush();
         }
     }
-        public static Map<String , String> readIntoDataBase() throws IOException {
+         static Map<String , String> readIntoDataBase() throws IOException {
             Map<String, String> userDataBase = new HashMap<>();
             try (BufferedReader reader = new BufferedReader(new FileReader("src/com/company/Login/DataBase/database.csv"))) {
                 String line;
@@ -60,6 +42,22 @@ public class ManagingDataBase {
                 }
             }
             return userDataBase;
+        }
+
+        public static void addUser(String name, String password) throws IOException {
+           Map<String, String> x = readIntoDataBase();
+           x.put(name, password);
+           writeIntoDataBase(x);
+        }
+
+        public static boolean isUserExists(String name) throws IOException {
+            Map<String, String> x = readIntoDataBase();
+             return x.containsKey(name.toLowerCase());
+        }
+
+        public static String getUsersPassword(String username) throws IOException {
+            Map<String, String> x = readIntoDataBase();
+            return x.get(username.toLowerCase());
         }
 
 }
