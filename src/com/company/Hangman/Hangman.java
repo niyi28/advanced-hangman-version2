@@ -42,7 +42,6 @@ public class Hangman {
                         correctIndexes.add(letterNum);
                     }
                 }
-
                 if (ifGuessTrue > 0){
                     playerScore = playerScore + 2;
                     for (int correctIndex : correctIndexes){
@@ -53,16 +52,13 @@ public class Hangman {
                     hangmanDoom.printhangmanDrawingWhenPlayerFails(numberOfFailedTries);
                     numberOfFailedTries--;
                     playerScore --;
-
                     printCorrectWordAfterEightTries(randomWord, numberOfFailedTries);
                 }
-
                 System.out.println("Guessed: " + guessedWord);
 
                 if (randomWord.equals(guessedWord)){
                     break;
                 }
-
                 int playedtimes = playingCounter + 1;
                 System.out.println("Hey " + username + ", you scored in your " + TimesYouWannaPlay.printTimesPlayed(playedtimes) + " playing time (s): " +  playerScore);
             }
@@ -85,8 +81,7 @@ public class Hangman {
     }
 
     private void printTheInstructions(){
-        HangmanIntro hangmanIntro = new HangmanIntro();
-        hangmanIntro.printGameInstructions(username);
+        HangmanIntro.printGameInstructions(username);
     }
 
     public void gameOverview(){
@@ -97,11 +92,8 @@ public class Hangman {
 
     private void printCorrectWordAfterEightTries(String word, int numberOfFailedTries){
         if (numberOfFailedTries == 0){
-
             System.out.println(username + ", the correct word is: " + word + ". You killed the man for nothing, learn!!");
-
         }
-
     }
 
     private void gameChoiceImplementer(){

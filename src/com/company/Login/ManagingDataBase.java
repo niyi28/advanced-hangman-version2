@@ -1,35 +1,37 @@
 package com.company.Login;
-import com.sun.source.tree.CompilationUnitTree;
 
 import java.io.*;
-import java.time.LocalDate;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ManagingDataBase {
 
     private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
-
         List<List<String>> rows = new ArrayList<>();
         for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
             rows.add(Arrays.asList(entry.getKey(), entry.getValue()));
         }
-
-
-        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter("src/com/company/Login/DataBase/database.csv"))) {
+        String path = "src/com/company/Login/DataBase/database.csv";
+        createOrMaintainDirectory(path);
+        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path))) {
             csvWriter.append("Username");
             csvWriter.append(",");
             csvWriter.append("Password");
             csvWriter.append("\n");
-
             for (List<String> rowData : rows) {
                 csvWriter.append(String.join(",", rowData));
                 csvWriter.append("\n");
             }
         }
     }
-         static Map<String , String> readIntoDataBase() throws IOException {
+        public static Map<String , String> readIntoDataBase() throws IOException {
             Map<String, String> userDataBase = new HashMap<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/com/company/Login/DataBase/database.csv"))) {
+
+            String path = "src/com/company/Login/DataBase/database.csv";
+            createOrMaintainDirectory(path);
+            try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
                 String line;
                 int counter = 0;
                 while ((line = reader.readLine()) != null) {
@@ -59,5 +61,19 @@ public class ManagingDataBase {
             Map<String, String> x = readIntoDataBase();
             return x.get(username.toLowerCase());
         }
+        private static void createOrMaintainDirectory(String path) throws IOException {
+        File csvFile = new File(path);
+        csvFile.getParentFile().mkdirs();
+        csvFile.createNewFile();
+            /*if (!csvFile.exists()) {
+                Path pathCheck = Paths.get(path);
+                Files.createDirectories(pathCheck);
+                *//*File parentFile = csvFile.getParentFile();*//*
+                *//*parentFile.mkdirs();
+                csvFile.createNewFile();*//*
+            }*/
+        }
+
+
 
 }

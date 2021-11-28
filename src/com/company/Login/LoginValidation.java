@@ -32,7 +32,7 @@ public class LoginValidation {
         this.username = username;
     }
 
-    private void toSignUp() throws IOException{
+    private void toSignUp() throws IOException, BadLoginDetails{
         System.out.println("Signing up!!!!!");
         String username = "";
         boolean incorrectUsername = true;
@@ -45,35 +45,32 @@ public class LoginValidation {
             }
         }
         String password = LoginDetails.getPassword();
-        //usernamesData.put(username, password);
-            ManagingDataBase.addUser(username,password);
+        ManagingDataBase.addUser(username,password);
         setUsername(username);
     }
 
-    private void toSignIn() throws IOException {
+    private void toSignIn() throws IOException, BadLoginDetails{
         System.out.println("Signing in!!!!!");
         String username = "";
-        boolean incorrectUsername = true;
-        while(incorrectUsername){
-            try{
-                username = LoginDetails.getUsername();
-                toCheckInDatabase(username);
-                incorrectUsername = false;
-            }catch(BadLoginDetails | IOException e){
-                System.out.println(e.getMessage());
-            }
+
+        username = LoginDetails.getUsername();
+        if (ManagingDataBase.isUserExists(username)) {
+            String password = LoginDetails.getPassword();
+            toCheckPassword(username, password);
+            setUsername(username);
+        }else {
+            System.out.println("We do not have this username stored. Taking you back!!!");
+            flockingIntoSocialFolks();
         }
-        String password = LoginDetails.getPassword();
-        toCheckPassword(username, password);
-        setUsername(username);
+
     }
 
-    private void toCheckInDatabase(String username) throws IOException {
+    /*private void toCheckInDatabase(String username) throws IOException {
         if (!ManagingDataBase.isUserExists(username)){
             System.out.println("We do not have this username stored. Taking you back!!!");
             flockingIntoSocialFolks();
         }
-    }
+    }*/
 
     private void toCheckPassword(String username, String password) throws IOException {
         int numberOfTries = 3;
@@ -88,8 +85,6 @@ public class LoginValidation {
             }
         }
     }
-
-
 
     public void flockingIntoSocialFolks() throws IOException {
         System.out.print("Please select 1 to sign in and other numbers or letters to sign up: ");

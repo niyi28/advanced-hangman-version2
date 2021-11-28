@@ -2,15 +2,15 @@ package com.company.Hangman;
 
 public class HangmanIntro{
 
-    public void printGameInstructions(String username){
-        System.out.println("\n INSTRUCTIONS \n ============");
-        System.out.println("\n 1: HANGAMN IS THE GAME WHERE YOU HAVE TO GUESS THE WORD.");
-        System.out.println("\n 2: YOU WILL HAVE TO GUESS THE MAXIMUM WORDS FOR THE MAXIMUM SCORE.");
-        System.out.println("\n 3: EVERY LEVEL WILL HAVE THE NEW WORD .");
-        System.out.println("\n 4: 1 CORRECT LETTER = 1 SCORE");
-        System.out.println("\n 5: YOU HAVE THE n CHOICES TO FIND THE MAXIMUM WORDS\n");
+    public static void printGameInstructions(String username){
+        System.out.println("INSTRUCTIONS============");
+        System.out.println("1: HANGAMN IS THE GAME WHERE YOU HAVE TO GUESS THE WORD.");
+        System.out.println("2: YOU WILL HAVE TO GUESS THE MAXIMUM WORDS FOR THE MAXIMUM SCORE.");
+        System.out.println("3: EVERY LEVEL WILL HAVE THE NEW WORD .");
+        System.out.println("4: 1 CORRECT LETTER = 1 SCORE");
+        System.out.println("5: YOU HAVE THE n CHOICES TO FIND THE MAXIMUM WORDS");
 
-        System.out.println("\n HOW TO PLAY \n ===========");
+        System.out.println("HOW TO PLAY \n ===========");
         System.out.println(username + ", use your keyboard and guess each letter in the word. \nIf you guess right, you get two points and if you guess wrong, you loose a point. BEST OF LUCK !");
         System.out.println("Press: P for PLAY");
         System.out.println("Press: I for INSTRUCTIONS");
