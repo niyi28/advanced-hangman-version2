@@ -12,11 +12,11 @@ public class ApplicationOverview {
         loginValidation.flockingIntoSocialFolks();
         String username = loginValidation.getUsername();
         System.out.println("username: " + username);
-        /*Hangman hangman = new Hangman(username);
-        hangman.gameOverview();*/
+        Hangman hangman = new Hangman(username);
+        hangman.gameOverview();
        // System.out.println("username data store after: " + loginValidation.getUsernamesData());
-        /*ncxrdklr4ore94degf*/
-        /*Hangman hangman = new Hangman(username);
+
+       /* Hangman hangman = new Hangman(username);
         hangman.gameOverview();*/
     }
 }

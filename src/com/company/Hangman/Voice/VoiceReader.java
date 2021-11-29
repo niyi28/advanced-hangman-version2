@@ -1,14 +1,12 @@
 package com.company.Hangman.Voice;
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.IOException;
 
 public class VoiceReader {
+    public static void readingVoice(String result, String language) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 
-    private static void readVoice() throws Exception {
-        File yourFile = new File("pass_German.mp3");
+        File yourFile = new File("src/com/company/Hangman/Voice/fail_English.mp3");
         AudioInputStream stream;
         AudioFormat format;
         DataLine.Info info;

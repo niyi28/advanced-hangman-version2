@@ -16,14 +16,14 @@ public class WordsGenerator{
             addGameLanguages();
             int languageNumber = chooseGameLanguages();
             if (languageNumber == 1){
-                File myObj = new File( "src/com/company/Games/Hangman/WordsStore/EnglishWords.txt");
+                File myObj = new File( "src/com/company/Hangman/WordsStore/EnglishWords.txt");
                 Scanner myReader = new Scanner(myObj);
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine().toUpperCase();
                     listOfWords.add(data);
                 }
             }else if(languageNumber == 2){
-                File myObj = new File( "src/com/company/Games/Hangman/WordsStore/GermanWords.txt");
+                File myObj = new File( "src/com/company/Hangman/WordsStore/GermanWords.txt");
                 Scanner myReader = new Scanner(myObj);
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine().toUpperCase();
