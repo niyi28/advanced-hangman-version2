@@ -19,6 +19,10 @@ public class ManagingDataBase {
             csvWriter.append("Username");
             csvWriter.append(",");
             csvWriter.append("Password");
+            csvWriter.append(",");
+            csvWriter.append("Current Score");
+            csvWriter.append(",");
+            csvWriter.append("Best Score");
             csvWriter.append("\n");
             for (List<String> rowData : rows) {
                 csvWriter.append(String.join(",", rowData));

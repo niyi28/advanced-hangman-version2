@@ -35,18 +35,16 @@ public class LoginValidation {
     private void toSignUp() throws IOException, BadLoginDetails{
         System.out.println("Signing up!!!!!");
         String username = "";
-        boolean incorrectUsername = true;
-        while(incorrectUsername){
-            try{
-                username = LoginDetails.getUsername();
-                incorrectUsername = false;
-            }catch(BadLoginDetails e){
-                System.out.println(e.getMessage());
-            }
+
+        username = LoginDetails.getUsername();
+        if (!ManagingDataBase.isUserExists(username)) {
+            String password = LoginDetails.getPassword();
+            ManagingDataBase.addUser(username,password);
+            setUsername(username);
+        }else {
+            System.out.println("The username already exists, you can sign in instead!!!");
+            toSignIn();
         }
-        String password = LoginDetails.getPassword();
-        ManagingDataBase.addUser(username,password);
-        setUsername(username);
     }
 
     private void toSignIn() throws IOException, BadLoginDetails{

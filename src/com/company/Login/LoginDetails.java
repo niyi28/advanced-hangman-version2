@@ -56,8 +56,6 @@ public class LoginDetails {
         return true;
     }
 
-
-
     public static String getPassword(){
         /*"hh"*/
         System.out.print("Please put in your secure password: ");
