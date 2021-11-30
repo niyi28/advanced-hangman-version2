@@ -1,9 +1,8 @@
 package com.company.Login;
 
+import com.company.Hangman.Hangman;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class ManagingDataBase {
@@ -11,6 +10,10 @@ public class ManagingDataBase {
     private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
         List<List<String>> rows = new ArrayList<>();
         for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
+            Hangman hangman = new Hangman(entry.getKey());
+            String playerScore = String.valueOf(0);
+            String bestScore = String.valueOf(0);
+
             rows.add(Arrays.asList(entry.getKey(), entry.getValue()));
         }
         String path = "src/com/company/Login/DataBase/database.csv";
@@ -32,7 +35,6 @@ public class ManagingDataBase {
     }
         public static Map<String , String> readIntoDataBase() throws IOException {
             Map<String, String> userDataBase = new HashMap<>();
-
             String path = "src/com/company/Login/DataBase/database.csv";
             createOrMaintainDirectory(path);
             try (BufferedReader reader = new BufferedReader(new FileReader(path))) {

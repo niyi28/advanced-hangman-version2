@@ -5,18 +5,17 @@ import java.util.ArrayList;
 public class Hangman {
     ScannerInitiator scannerInitiator = new ScannerInitiator();
     final private String username;
+    private int userFinaScore;
 
     public Hangman(String username){
         this.username = username;
     }
 
     private void playGame (){
-        int numberOfPlaying = TimesYouWannaPlay.numOfPlayingTimes();
         System.out.println("\nLet's play!");
         WordRandomizer wordRandomizer = new WordRandomizer();
         int playerScore = 0;
 
-        for(int playingCounter = 0; playingCounter < numberOfPlaying; playingCounter++){
             ArrayList<Character> remainingAlphabet = new ArrayList<Character>();
 
             for(char letter = 'A'; letter <= 'Z'; ++letter){
@@ -59,12 +58,16 @@ public class Hangman {
                 if (randomWord.equals(guessedWord)){
                     break;
                 }
-                int playedtimes = playingCounter + 1;
-                System.out.println("Hey " + username + ", you scored in your " + TimesYouWannaPlay.printTimesPlayed(playedtimes) + " playing time (s): " +  playerScore);
-            }
+
+                System.out.println("Hey " + username + ", you scored : " +  playerScore);
+                userFinaScore = playerScore;
+
         }
     }
 
+    public int getUserFinaScore() {
+        return userFinaScore;
+    }
 
     private void gameIntro(){
         HangmanIntro hangmanIntro = new HangmanIntro();
