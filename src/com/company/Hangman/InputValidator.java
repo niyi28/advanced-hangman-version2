@@ -15,15 +15,15 @@ public class InputValidator {
         String guessedLetter = getGuess();
         while( !isValidLength(guessedLetter) || !isValidLetter(guessedLetter) || !isNewLetter(guessedLetter)){
             System.out.println("NOT valid! Its either you put in an invalid letter or repeating an already used letter ");
-            guessedLetter = scannerInitiator.getScannerString();
+            System.out.println("");
+            guessedLetter = getGuess();
         }
         return guessedLetter;
     }
 
     private String getGuess(){
         System.out.print("Guess: ");
-        String guessedLetter = scannerInitiator.getScannerString();
-        return guessedLetter;
+        return scannerInitiator.getScannerString();
     }
 
     private boolean isValidLength (String guessedLetter){

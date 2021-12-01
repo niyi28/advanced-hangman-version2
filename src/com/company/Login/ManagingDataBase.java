@@ -7,14 +7,14 @@ import java.util.*;
 
 public class ManagingDataBase {
 
-    private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
+    private static void writeIntoDataBase(Map<String, String> usernameDataBase, List <Integer> scores) throws IOException {
         List<List<String>> rows = new ArrayList<>();
         for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
-            Hangman hangman = new Hangman(entry.getKey());
-            String playerScore = String.valueOf(0);
-            String bestScore = String.valueOf(0);
+            scores.add(1);
+            scores.add(4);
 
-            rows.add(Arrays.asList(entry.getKey(), entry.getValue()));
+            rows.add(Arrays.asList(entry.getKey(), entry.getValue(),
+                    String.valueOf(scores.get(0)), String.valueOf(scores.get(1))));
         }
         String path = "src/com/company/Login/DataBase/database.csv";
         createOrMaintainDirectory(path);
@@ -55,8 +55,20 @@ public class ManagingDataBase {
         public static void addUser(String name, String password) throws IOException {
            Map<String, String> x = readIntoDataBase();
            x.put(name, password);
-           writeIntoDataBase(x);
+            List <Integer> scores = new ArrayList<>();
+            scores.add(1);
+            scores.add(4);
+           writeIntoDataBase(x, scores);
         }
+
+    public static void addScore(String userName, String password) throws IOException {
+        Map<String, String> x = readIntoDataBase();
+        x.put(userName, password);
+        List <Integer> scores = new ArrayList<>();
+        scores.add(1);
+        scores.add(4);
+        writeIntoDataBase(x, scores);
+    }
 
         public static boolean isUserExists(String name) throws IOException {
             Map<String, String> x = readIntoDataBase();

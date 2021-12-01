@@ -56,6 +56,7 @@ public class LoginValidation {
             String password = LoginDetails.getPassword();
             toCheckPassword(username, password);
             setUsername(username);
+            ManagingDataBase.addScore(username, password);
         }else {
             System.out.println("We do not have this username stored. Taking you back!!!");
             flockingIntoSocialFolks();

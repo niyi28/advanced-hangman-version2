@@ -45,12 +45,19 @@ public class LevelsOfDifficulty{
     public String getGameLevel(){
         printGameLevels();
         int chosenLevelNumber = chooseLevelNumber();
+        validateChosenLevel(chosenLevelNumber);
         chosenLevelNumber--;
         String gameLevel = gameLevels.get(chosenLevelNumber);
         printGameLevel(gameLevel);
         return gameLevel;
     }
 
+    private void validateChosenLevel(int chosenLevelNumber){
+        while(!(chosenLevelNumber == 1 || chosenLevelNumber == 2 || chosenLevelNumber == 3)){
+            printGameLevels();
+            chosenLevelNumber = chooseLevelNumber();
+        }
+    }
     private void printGameLevel (String gameLevel){
         System.out.println("You have chosen: " + gameLevel);
     }
