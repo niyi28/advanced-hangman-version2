@@ -1,20 +1,19 @@
 package com.company.Login;
 
-import com.company.Hangman.Hangman;
+import com.company.Hangman.ScoreManagement;
 
 import java.io.*;
 import java.util.*;
 
 public class ManagingDataBase {
 
-    private static void writeIntoDataBase(Map<String, String> usernameDataBase, List <Integer> scores) throws IOException {
+    private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
         List<List<String>> rows = new ArrayList<>();
         for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
-            scores.add(1);
-            scores.add(4);
-
+            ScoreManagement scoreManagement = new ScoreManagement(entry.getKey());
+            List <String> score = scoreManagement.getScores();
             rows.add(Arrays.asList(entry.getKey(), entry.getValue(),
-                    String.valueOf(scores.get(0)), String.valueOf(scores.get(1))));
+                    score.get(0), score.get(1)));
         }
         String path = "src/com/company/Login/DataBase/database.csv";
         createOrMaintainDirectory(path);
@@ -33,8 +32,40 @@ public class ManagingDataBase {
             }
         }
     }
-        public static Map<String , String> readIntoDataBase() throws IOException {
-            Map<String, String> userDataBase = new HashMap<>();
+
+    public static List<String> deriveUserScoreSheet (String username) throws IOException {
+        List<String> usersScores = new ArrayList();
+        String currentScore = "0";
+        String bestScore = "0";
+
+        if (isUserExists(username)){
+            currentScore = getUserAndScoresFromDataBase().get(username).get(0);
+            bestScore = getUserAndScoresFromDataBase().get(username).get(1);
+        }
+        usersScores.add(currentScore);
+        usersScores.add(bestScore);
+        return usersScores;
+
+    }
+    public static Map<String , String> readLoginDetailsFromDataBase() throws IOException {
+        Map<String, String> userDataBase = new HashMap<>();
+        String path = "src/com/company/Login/DataBase/database.csv";
+        createOrMaintainDirectory(path);
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String line;
+            int counter = 0;
+            while ((line = reader.readLine()) != null) {
+                counter++;
+                if (counter > 1) {
+                    String[] x = line.split(",");
+                    userDataBase.put(x[0], x[1]);
+                    }
+                }
+            }
+            return userDataBase;
+        }
+        public static Map <String, List<String>> getUserAndScoresFromDataBase() throws IOException {
+            Map <String, List<String>> userAndScores = new HashMap<>();
             String path = "src/com/company/Login/DataBase/database.csv";
             createOrMaintainDirectory(path);
             try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -44,52 +75,46 @@ public class ManagingDataBase {
                     counter++;
                     if (counter > 1) {
                         String[] x = line.split(",");
-                        userDataBase.put(x[0], x[1]);
-
+                        userAndScores.put(x[0], List.of(x[2], x[3]));
                     }
                 }
             }
-            return userDataBase;
+            return userAndScores;
         }
 
         public static void addUser(String name, String password) throws IOException {
-           Map<String, String> x = readIntoDataBase();
+           Map<String, String> x = readLoginDetailsFromDataBase();
            x.put(name, password);
-            List <Integer> scores = new ArrayList<>();
-            scores.add(1);
-            scores.add(4);
-           writeIntoDataBase(x, scores);
+           writeIntoDataBase(x);
         }
 
-    public static void addScore(String userName, String password) throws IOException {
-        Map<String, String> x = readIntoDataBase();
+   /* public static void addScore(String userName, String password) throws IOException {
+        Map<String, String> x = readLoginDetailsFromDataBase();
         x.put(userName, password);
         List <Integer> scores = new ArrayList<>();
         scores.add(1);
         scores.add(4);
-        writeIntoDataBase(x, scores);
-    }
+        writeLoginIntoDataBase(x);
+    }*/
+
 
         public static boolean isUserExists(String name) throws IOException {
-            Map<String, String> x = readIntoDataBase();
-             return x.containsKey(name.toLowerCase());
+            Map<String, String> x = readLoginDetailsFromDataBase();
+            return x.containsKey(name.toLowerCase());
         }
 
         public static String getUsersPassword(String username) throws IOException {
-            Map<String, String> x = readIntoDataBase();
+            Map<String, String> x = readLoginDetailsFromDataBase();
             return x.get(username.toLowerCase());
         }
         private static void createOrMaintainDirectory(String path) throws IOException {
-        File csvFile = new File(path);
-        csvFile.getParentFile().mkdirs();
-        csvFile.createNewFile();
-            /*if (!csvFile.exists()) {
-                Path pathCheck = Paths.get(path);
-                Files.createDirectories(pathCheck);
-                *//*File parentFile = csvFile.getParentFile();*//*
-                *//*parentFile.mkdirs();
-                csvFile.createNewFile();*//*
-            }*/
+            File csvFile = new File(path);
+            csvFile.getParentFile().mkdirs();
+            csvFile.createNewFile();
+        }
+
+        public static int getDatabaseSize() throws IOException {
+            return readLoginDetailsFromDataBase().size();
         }
 
 

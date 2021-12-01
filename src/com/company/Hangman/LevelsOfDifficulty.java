@@ -4,16 +4,13 @@ import java.util.ArrayList;
 
 public class LevelsOfDifficulty{
 
-    private ArrayList <String> gameLevels = new ArrayList <> ();
+    private final ArrayList <String> gameLevels = new ArrayList <> ();
     ScannerInitiator scannerInitiator = new ScannerInitiator();
 
     public LevelsOfDifficulty (){
         gameLevels.add("Easy");
         gameLevels.add("Medium");
         gameLevels.add("Hard");
-        this.gameLevels = gameLevels;
-
-        this.scannerInitiator = scannerInitiator;
     }
 
 
@@ -45,19 +42,12 @@ public class LevelsOfDifficulty{
     public String getGameLevel(){
         printGameLevels();
         int chosenLevelNumber = chooseLevelNumber();
-        validateChosenLevel(chosenLevelNumber);
         chosenLevelNumber--;
         String gameLevel = gameLevels.get(chosenLevelNumber);
         printGameLevel(gameLevel);
         return gameLevel;
     }
 
-    private void validateChosenLevel(int chosenLevelNumber){
-        while(!(chosenLevelNumber == 1 || chosenLevelNumber == 2 || chosenLevelNumber == 3)){
-            printGameLevels();
-            chosenLevelNumber = chooseLevelNumber();
-        }
-    }
     private void printGameLevel (String gameLevel){
         System.out.println("You have chosen: " + gameLevel);
     }

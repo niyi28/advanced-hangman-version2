@@ -34,7 +34,6 @@ public class LoginValidation {
 
     private void toSignUp() throws IOException, BadLoginDetails{
         System.out.println("Signing up!!!!!");
-        String username = "";
 
         username = LoginDetails.getUsername();
         if (!ManagingDataBase.isUserExists(username)) {
@@ -49,14 +48,12 @@ public class LoginValidation {
 
     private void toSignIn() throws IOException, BadLoginDetails{
         System.out.println("Signing in!!!!!");
-        String username = "";
 
         username = LoginDetails.getUsername();
         if (ManagingDataBase.isUserExists(username)) {
             String password = LoginDetails.getPassword();
             toCheckPassword(username, password);
             setUsername(username);
-            ManagingDataBase.addScore(username, password);
         }else {
             System.out.println("We do not have this username stored. Taking you back!!!");
             flockingIntoSocialFolks();

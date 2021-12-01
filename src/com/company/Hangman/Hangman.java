@@ -1,22 +1,25 @@
 package com.company.Hangman;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Hangman {
     ScannerInitiator scannerInitiator = new ScannerInitiator();
     final private String username;
-    private int userFinaScore;
+    final private ScoreManagement scoreManagement;
 
-    public Hangman(String username){
+    public Hangman(String username) throws IOException {
         this.username = username;
+        scoreManagement = new ScoreManagement(username);
     }
 
-    private void playGame (){
+    private void playGame () throws IOException {
+
         System.out.println("\nLet's play!");
         WordRandomizer wordRandomizer = new WordRandomizer();
         int playerScore = 0;
 
-            ArrayList<Character> remainingAlphabet = new ArrayList<Character>();
+            ArrayList<Character> remainingAlphabet = new ArrayList<>();
 
             for(char letter = 'A'; letter <= 'Z'; ++letter){
                 remainingAlphabet.add(letter);
@@ -60,13 +63,8 @@ public class Hangman {
                 }
 
                 System.out.println("Hey " + username + ", you scored : " +  playerScore);
-                userFinaScore = playerScore;
-
+                scoreManagement.setCurrentScore(username, playerScore);
         }
-    }
-
-    public int getUserFinaScore() {
-        return userFinaScore;
     }
 
     private void gameIntro(){
@@ -87,10 +85,9 @@ public class Hangman {
         HangmanIntro.printGameInstructions(username);
     }
 
-    public void gameOverview(){
+    public void gameOverview() throws IOException {
         gameIntro();
         gameChoiceImplementer();
-
     }
 
     private void printCorrectWordAfterEightTries(String word, int numberOfFailedTries){
@@ -99,7 +96,7 @@ public class Hangman {
         }
     }
 
-    private void gameChoiceImplementer(){
+    private void gameChoiceImplementer() throws IOException {
         printTheInstructions();
         String chosenInstruction = getchosenInstruction();
         if (chosenInstruction.equals("P")){
