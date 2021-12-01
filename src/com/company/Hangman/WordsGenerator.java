@@ -10,6 +10,7 @@ public class WordsGenerator{
     private final ArrayList <String > listOfWords = new ArrayList <> ();
     private final HashMap <Integer, String> languageOptions = new HashMap <> ();
     private final ScannerInitiator scannerInitiator = new ScannerInitiator();
+    private String userLanguage;
 
     public WordsGenerator (){
         try{
@@ -22,6 +23,7 @@ public class WordsGenerator{
                     String data = myReader.nextLine().toUpperCase();
                     listOfWords.add(data);
                 }
+                userLanguage = "English";
             }else if(languageNumber == 2){
                 File myObj = new File( "src/com/company/Hangman/WordsStore/GermanWords.txt");
                 Scanner myReader = new Scanner(myObj);
@@ -29,6 +31,7 @@ public class WordsGenerator{
                     String data = myReader.nextLine().toUpperCase();
                     listOfWords.add(data);
                 }
+                userLanguage = "German";
             }
         }catch (FileNotFoundException e){
             System.out.println("An error occurred.");
@@ -45,6 +48,9 @@ public class WordsGenerator{
         languageOptions.put(2, "German");
     }
 
+    public String getUserLanguage() {
+        return userLanguage;
+    }
 
     private int chooseGameLanguages(){
         int languageNumber = 0;

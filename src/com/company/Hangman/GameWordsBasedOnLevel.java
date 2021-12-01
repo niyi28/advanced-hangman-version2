@@ -8,6 +8,11 @@ public class GameWordsBasedOnLevel{
     LevelsOfDifficulty levelsOfDifficulty = new LevelsOfDifficulty();
     ArrayList <String> listOfWords;
     String difficultyLevel;
+    String userLanguage = wordsGenerator.getUserLanguage();
+
+    public String getUserLanguage() {
+        return userLanguage;
+    }
 
     public GameWordsBasedOnLevel(){
         ArrayList <String> listOfWords = wordsGenerator.getListOfWords();

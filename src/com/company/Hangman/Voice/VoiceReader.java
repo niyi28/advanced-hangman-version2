@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class VoiceReader {
     public static void readingVoice(String result, String language) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
-
-        File yourFile = new File("src/com/company/Hangman/Voice/fail_English.mp3");
+        String path = "src/com/company/Hangman/Voice/" + result + "_" + language + ".mp3";
+        File yourFile = new File(path);
         AudioInputStream stream;
         AudioFormat format;
         DataLine.Info info;

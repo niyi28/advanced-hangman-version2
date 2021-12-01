@@ -1,5 +1,9 @@
 package com.company.Hangman;
 
+import com.company.Hangman.Voice.VoiceReader;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +17,7 @@ public class Hangman {
         scoreManagement = new ScoreManagement(username);
     }
 
-    private void playGame () throws IOException {
+    private void playGame () throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 
         System.out.println("\nLet's play!");
         WordRandomizer wordRandomizer = new WordRandomizer();
@@ -49,12 +53,13 @@ public class Hangman {
                     for (int correctIndex : correctIndexes){
                         guessedWord = guessedWord.substring(0, correctIndex) + guessedLetterUpperCase +  guessedWord.substring(correctIndex + 1);
                     }
+                    VoiceReader.readingVoice("pass", wordRandomizer.getUserLanguage());
                 } else{
                     HangmanDoom hangmanDoom = new HangmanDoom();
                     hangmanDoom.printhangmanDrawingWhenPlayerFails(numberOfFailedTries);
                     numberOfFailedTries--;
                     playerScore --;
-                    printCorrectWordAfterEightTries(randomWord, numberOfFailedTries);
+                    printCorrectWordAfterEightTries(randomWord, numberOfFailedTries, wordRandomizer.getUserLanguage());
                 }
                 System.out.println("Guessed: " + guessedWord);
 
@@ -85,18 +90,19 @@ public class Hangman {
         HangmanIntro.printGameInstructions(username);
     }
 
-    public void gameOverview() throws IOException {
+    public void gameOverview() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         gameIntro();
         gameChoiceImplementer();
     }
 
-    private void printCorrectWordAfterEightTries(String word, int numberOfFailedTries){
+    private void printCorrectWordAfterEightTries(String word, int numberOfFailedTries, String language) throws UnsupportedAudioFileException, LineUnavailableException, IOException, InterruptedException {
         if (numberOfFailedTries == 0){
             System.out.println(username + ", the correct word is: " + word + ". You killed the man for nothing, learn!!");
         }
+        VoiceReader.readingVoice("fail", language);
     }
 
-    private void gameChoiceImplementer() throws IOException {
+    private void gameChoiceImplementer() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         printTheInstructions();
         String chosenInstruction = getchosenInstruction();
         if (chosenInstruction.equals("P")){

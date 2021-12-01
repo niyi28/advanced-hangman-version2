@@ -7,6 +7,8 @@ public class WordRandomizer{
     private GameWordsBasedOnLevel gameWordsBasedOnLevel = new GameWordsBasedOnLevel();
     private ArrayList <String> listOfWords;
     private int numberOfStoredWords;
+    private String userLanguage = gameWordsBasedOnLevel.getUserLanguage();
+
 
     public WordRandomizer (){
         ArrayList <String> listOfWords = gameWordsBasedOnLevel.getWordsForChosenLevel();
@@ -20,6 +22,10 @@ public class WordRandomizer{
         int max = numberOfStoredWords;
         int randomNumber = (int)(Math.random()*((max-min)+1))+min;
         return randomNumber;
+    }
+
+    public String getUserLanguage() {
+        return userLanguage;
     }
 
     public String getRandomWord (){
