@@ -1,4 +1,4 @@
-package com.company.Login;
+package com.company.Login.DataBase;
 
 import com.company.Hangman.ScoreManagement;
 
@@ -7,11 +7,11 @@ import java.util.*;
 
 public class ManagingDataBase {
 
-    private static void writeIntoDataBase(Map<String, String> usernameDataBase) throws IOException {
+    private static void writeIntoDataBase(Map<String, String> usernameDataBase,
+                                          ScoreManagement scoreManagement) throws IOException {
         List<List<String>> rows = new ArrayList<>();
         for(Map.Entry<String, String> entry: usernameDataBase.entrySet()){
-            ScoreManagement scoreManagement = new ScoreManagement(entry.getKey());
-            List <String> score = scoreManagement.getScores();
+            List <String> score = scoreManagement.getScores(entry.getKey());
             rows.add(Arrays.asList(entry.getKey(), entry.getValue(),
                     score.get(0), score.get(1)));
         }
@@ -64,6 +64,7 @@ public class ManagingDataBase {
             }
             return userDataBase;
         }
+
         public static Map <String, List<String>> getUserAndScoresFromDataBase() throws IOException {
             Map <String, List<String>> userAndScores = new HashMap<>();
             String path = "src/com/company/Login/DataBase/database.csv";
@@ -82,20 +83,12 @@ public class ManagingDataBase {
             return userAndScores;
         }
 
-        public static void addUser(String name, String password) throws IOException {
+        public static void addUserAndScore(String name, String password, ScoreManagement scoreManagement)
+                throws IOException {
            Map<String, String> x = readLoginDetailsFromDataBase();
            x.put(name, password);
-           writeIntoDataBase(x);
+           writeIntoDataBase(x, scoreManagement);
         }
-
-   /* public static void addScore(String userName, String password) throws IOException {
-        Map<String, String> x = readLoginDetailsFromDataBase();
-        x.put(userName, password);
-        List <Integer> scores = new ArrayList<>();
-        scores.add(1);
-        scores.add(4);
-        writeLoginIntoDataBase(x);
-    }*/
 
 
         public static boolean isUserExists(String name) throws IOException {

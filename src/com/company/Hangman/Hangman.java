@@ -1,6 +1,7 @@
 package com.company.Hangman;
 
 import com.company.Hangman.Voice.VoiceReader;
+import com.company.Login.DataBase.ManagingDataBase;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -11,9 +12,11 @@ public class Hangman {
     ScannerInitiator scannerInitiator = new ScannerInitiator();
     final private String username;
     final private ScoreManagement scoreManagement;
+    final private String password;
 
-    public Hangman(String username) throws IOException {
+    public Hangman(String username, String password) throws IOException {
         this.username = username;
+        this.password = password;
         scoreManagement = new ScoreManagement(username);
     }
 
@@ -68,8 +71,9 @@ public class Hangman {
                 }
 
                 System.out.println("Hey " + username + ", you scored : " +  playerScore);
-                scoreManagement.setCurrentScore(username, playerScore);
+                scoreManagement.setCurrentScore(playerScore);
         }
+        ManagingDataBase.addUserAndScore(username,password, scoreManagement);
     }
 
     private void gameIntro(){

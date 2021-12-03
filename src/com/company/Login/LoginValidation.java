@@ -1,8 +1,8 @@
 package com.company.Login;
 
+import com.company.Login.DataBase.ManagingDataBase;
+
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class LoginValidation {
@@ -10,23 +10,17 @@ public class LoginValidation {
     //private Map<String, String> usernamesData = new HashMap<>();
     private final Scanner scanner = new Scanner(System.in);
     private String username;
+    private String password;
 
-//
-//    public LoginValidation() {
-//        try{
-//           usernamesData =  ManagingDataBase.readIntoDataBase();
-//        }catch (IOException e){
-//            System.out.println("Oops! Could not read file!");
-//        }
-//    }
 
     public String getUsername() {
         return username;
     }
 
-//    public Map<String, String> getUsernamesData() {
-//        return usernamesData;
-//    }
+    public String getPassword() {
+        return password;
+    }
+
 
     private void setUsername(String username) {
         this.username = username;
@@ -37,8 +31,7 @@ public class LoginValidation {
 
         username = LoginDetails.getUsername();
         if (!ManagingDataBase.isUserExists(username)) {
-            String password = LoginDetails.getPassword();
-            ManagingDataBase.addUser(username,password);
+            password = LoginDetails.getPassword();
             setUsername(username);
         }else {
             System.out.println("The username already exists, you can sign in instead!!!");
@@ -51,7 +44,7 @@ public class LoginValidation {
 
         username = LoginDetails.getUsername();
         if (ManagingDataBase.isUserExists(username)) {
-            String password = LoginDetails.getPassword();
+            password = LoginDetails.getPassword();
             toCheckPassword(username, password);
             setUsername(username);
         }else {
@@ -60,13 +53,6 @@ public class LoginValidation {
         }
 
     }
-
-    /*private void toCheckInDatabase(String username) throws IOException {
-        if (!ManagingDataBase.isUserExists(username)){
-            System.out.println("We do not have this username stored. Taking you back!!!");
-            flockingIntoSocialFolks();
-        }
-    }*/
 
     private void toCheckPassword(String username, String password) throws IOException {
         int numberOfTries = 3;

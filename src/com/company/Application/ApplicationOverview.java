@@ -13,12 +13,21 @@ public class ApplicationOverview {
         LoginValidation loginValidation = new LoginValidation();
         loginValidation.flockingIntoSocialFolks();
         String username = loginValidation.getUsername();
+        String password = loginValidation.getPassword();
         System.out.println("username: " + username);
-        Hangman hangman = new Hangman(username);
+        Hangman hangman = new Hangman(username, password);
         hangman.gameOverview();
+
+        /*http://localhost:8081/game.html*/
        // System.out.println("username data store after: " + loginValidation.getUsernamesData());
 
        /* Hangman hangman = new Hangman(username);
         hangman.gameOverview();*/
+
+        /*/createGame?playerName=Oleniyi*/
+
+        /*/createGame?playerName=Oleniyi&language=english*/
+
+
     }
 }
