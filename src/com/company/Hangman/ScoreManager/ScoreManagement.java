@@ -1,4 +1,4 @@
-package com.company.Hangman;
+package com.company.Hangman.ScoreManager;
 
 import com.company.Login.DataBase.ManagingDataBase;
 
@@ -18,6 +18,7 @@ public class ScoreManagement {
     public ScoreManagement(String username) throws IOException {
         setBestScore(username);
         this.username = username;
+        currentAvg = getAverageScore();
     }
 
     public void setBestScore(String username) throws IOException {
@@ -28,12 +29,37 @@ public class ScoreManagement {
         return Math.max(currentScore, bestScore);
     }
 
-    public int getAverageScore(String username) throws IOException {
+    private int getAverageScore() throws IOException {
         bestScore = selectBestScore(currentScore);
         currentAvg =  ((currentAvg*(numberOfUsers-1)/numberOfUsers) +
                         (bestScore/numberOfUsers));
         return currentAvg;
     }
+
+    private int getAverageScore(int currentScore, int bestScore) throws IOException {
+        bestScore = selectBestScore(currentScore);
+        currentAvg =  ((currentAvg*(numberOfUsers-1)/numberOfUsers) +
+                        (bestScore/numberOfUsers));
+        return currentAvg;
+    }
+
+    public GradeBestScore scalingBestScore(String username) throws IOException {
+        if (this.username.equals(username)){
+            if (bestScore < currentAvg){
+                System.out.println(this.username + "'s best score is lower than average best score");
+                return GradeBestScore.BelowAverage;
+            }else if (bestScore > currentAvg){
+                System.out.println(this.username + "'s best score is higher than average best score");
+                return GradeBestScore.AboveAverage;
+            }else{
+                System.out.println(this.username + "'s best score is average best score");
+                return GradeBestScore.Average;
+            }
+        }
+        return ManagingDataBase.getUserGradeScale(username);
+    }
+
+
 
     public void setCurrentScore(int currentScore) throws IOException {
         this.currentScore = currentScore;

@@ -1,4 +1,4 @@
-package com.company.Hangman;
+package com.company.Hangman.SupplementaryClasses;
 
 import java.util.Scanner;
 

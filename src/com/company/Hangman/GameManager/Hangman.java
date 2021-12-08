@@ -1,6 +1,12 @@
-package com.company.Hangman;
+package com.company.Hangman.GameManager;
 
+import com.company.Hangman.SupplementaryClasses.Alphabets;
+import com.company.Hangman.SupplementaryClasses.InputValidator;
+import com.company.Hangman.SupplementaryClasses.ScannerInitiator;
+import com.company.Hangman.ScoreManager.ScoreManagement;
+import com.company.Hangman.SupplementaryClasses.StringConverter;
 import com.company.Hangman.Voice.VoiceReader;
+import com.company.Hangman.WordsManager.Manager.WordRandomizer;
 import com.company.Login.DataBase.ManagingDataBase;
 
 import javax.sound.sampled.LineUnavailableException;

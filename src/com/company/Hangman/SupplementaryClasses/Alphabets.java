@@ -1,4 +1,4 @@
-package com.company.Hangman;
+package com.company.Hangman.SupplementaryClasses;
 
 import java.util.ArrayList;
 
@@ -18,15 +18,5 @@ public class Alphabets{
 
             }
         }
-    }
-
-
-    public static ArrayList<Character> getAlphabet(){
-
-        ArrayList<Character> alphabet = new ArrayList<Character>();
-        for(char letter = 'A'; letter <= 'Z'; ++letter){
-            alphabet.add(letter);
-        }
-        return alphabet;
     }
 }

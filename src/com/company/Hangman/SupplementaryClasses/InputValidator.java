@@ -1,9 +1,8 @@
-package com.company.Hangman;// import java.util.Scanner;
+package com.company.Hangman.SupplementaryClasses;// import java.util.Scanner;
 import java.util.ArrayList;
 
 public class InputValidator {
 
-    // Scanner scanner  = new Scanner(System.in);
     ArrayList <String> addedLetters = new ArrayList <> ();
     ScannerInitiator scannerInitiator = new ScannerInitiator();
 

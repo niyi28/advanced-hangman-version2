@@ -1,4 +1,6 @@
-package com.company.Hangman;
+package com.company.Hangman.GameManager;
+
+import com.company.Hangman.SupplementaryClasses.ScannerInitiator;
 
 import java.util.ArrayList;
 
@@ -13,12 +15,6 @@ public class LevelsOfDifficulty{
         gameLevels.add("Hard");
     }
 
-
-
-    // public InputValidator (){
-    //   this.scannerInitiator = scannerInitiator;
-    // }
-
     private void printGameLevels (){
         int levelNumber = 0;
         for (String gameLevel : gameLevels){
@@ -28,16 +24,10 @@ public class LevelsOfDifficulty{
     }
 
     private int chooseLevelNumber (){
-        // Scanner scanner = getScanner();
         System.out.print("Choose your level number: " );
         int chosenLevelNumber = scannerInitiator.getScannerInt();
         return chosenLevelNumber;
     }
-
-    // private Scanner getScanner (){
-    //     Scanner scanner = new Scanner(System.in);
-    //     return scanner;
-    // }
 
     public String getGameLevel(){
         printGameLevels();

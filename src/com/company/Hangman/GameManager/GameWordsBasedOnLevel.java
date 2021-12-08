@@ -1,4 +1,6 @@
-package com.company.Hangman;
+package com.company.Hangman.GameManager;
+
+import com.company.Hangman.WordsManager.Manager.WordsGenerator;
 
 import java.util.ArrayList;
 
@@ -21,13 +23,6 @@ public class GameWordsBasedOnLevel{
         this.difficultyLevel = difficultyLevel;
     }
 
-    private String goingThroughListOfWords(){
-        String gameWord = "";
-        for (String word : listOfWords){
-            gameWord = word;
-        }
-        return gameWord;
-    }
 
     private ArrayList <String> removeSingleLetterWords(){
         ArrayList <String> gameValidWords = new ArrayList <> ();

@@ -1,4 +1,4 @@
-package com.company.Hangman;
+package com.company.Hangman.GameManager;
 
 public class HangmanIntro{
 

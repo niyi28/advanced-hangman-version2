@@ -1,4 +1,6 @@
-package com.company.Hangman;
+package com.company.Hangman.WordsManager.Manager;
+
+import com.company.Hangman.GameManager.GameWordsBasedOnLevel;
 
 import java.util.ArrayList;
 
@@ -35,20 +37,6 @@ public class WordRandomizer{
         return randomWord;
     }
 
-    public String convertoCharacter (String word, String character){
-        String guessedWord = "";
-        int lenOfWord = word.length();
-        System.out.println("The chosen word has " + lenOfWord + " letters.");
-        String gap = character;
-        int i = 0;
-        while(i < lenOfWord){
-            guessedWord += gap;
-            i++;
-        }
-
-        System.out.println(guessedWord);
-        return guessedWord;
-    }
 }
 
 

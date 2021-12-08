@@ -1,4 +1,4 @@
-package com.company.Hangman;
+package com.company.Hangman.GameManager;
 
 import java.util.HashMap;
 

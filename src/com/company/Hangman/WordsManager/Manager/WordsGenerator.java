@@ -1,4 +1,6 @@
-package com.company.Hangman;
+package com.company.Hangman.WordsManager.Manager;
+
+import com.company.Hangman.SupplementaryClasses.ScannerInitiator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +19,7 @@ public class WordsGenerator{
             addGameLanguages();
             int languageNumber = chooseGameLanguages();
             if (languageNumber == 1){
-                File myObj = new File( "src/com/company/Hangman/WordsStore/EnglishWords.txt");
+                File myObj = new File( "src/com/company/Hangman/WordsManager/WordsStore/EnglishWords.txt");
                 Scanner myReader = new Scanner(myObj);
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine().toUpperCase();
@@ -25,7 +27,7 @@ public class WordsGenerator{
                 }
                 userLanguage = "English";
             }else if(languageNumber == 2){
-                File myObj = new File( "src/com/company/Hangman/WordsStore/GermanWords.txt");
+                File myObj = new File( "src/com/company/Hangman/WordsManager/WordsStore/GermanWords.txt");
                 Scanner myReader = new Scanner(myObj);
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine().toUpperCase();
@@ -34,7 +36,7 @@ public class WordsGenerator{
                 userLanguage = "German";
             }
         }catch (FileNotFoundException e){
-            System.out.println("An error occurred.");
+            System.out.println("Could not read the file");
             e.printStackTrace();
         }
     }
